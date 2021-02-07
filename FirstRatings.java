@@ -278,4 +278,16 @@ public class FirstRatings {
         System.out.println("\nThere are: " + ratedMoviesCount 
                             + " rated movies in the database");
     }
+    
+    public void testSecondRatings(){
+        String ratingsfile = "ratings.csv";
+        ArrayList<Rater> raters = loadRaters("data/" + ratingsfile);
+        System.out.println("The number of raters is: " 
+                                                    + raters.size());
+        
+        String moviefile = "ratedmoviesfull.csv";
+        ArrayList<Movie> movies = loadMovies("data/" + moviefile);
+        System.out.println("The number of movies is: " 
+                                                    + movies.size());
+    }
 }

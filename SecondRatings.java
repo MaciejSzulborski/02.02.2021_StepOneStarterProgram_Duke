@@ -15,7 +15,7 @@ public class SecondRatings {
     public SecondRatings() {
         // default constructor
         //this("data/ratedmoviesfull.csv", "data/ratings.csv");
-        this("data/ratedmovies_short.csv", "data/ratings_short.csv");
+        this("data/ratedmovies_quiz1.csv", "data/ratings_quiz1.csv");
     }
     
     public SecondRatings(String moviefile,String ratingsfile) {
@@ -66,8 +66,7 @@ public class SecondRatings {
         int ratingCount = 0;
         double totalRating = 0.0;
         double average = 0.0;
-        for (int i = 0; i < myRaters.size(); i++) {
-            Rater currRater = myRaters.get(i);
+        for (Rater currRater : myRaters) {
             if(currRater.hasRating(id)){
                 ratingCount++;
                 totalRating += currRater.getRating(id);
@@ -81,29 +80,19 @@ public class SecondRatings {
         return average;
     }
     
+    // Rework getAverageRatings to get movies from movies instead 
+    // of movie id's within raters
+    
     public ArrayList<Rating> getAverageRatings(int minimalRaters){
-        ArrayList<String> ratedMovies = new ArrayList<String>();
         ArrayList<Rating> averageRatings = new ArrayList<Rating>();
-        // itterate over all raters
-        for (int i = 0; i < myRaters.size(); i++) {
-            Rater currRater = myRaters.get(i);
-            String currID = currRater.getID();
-            // make a list of movies rated by CurrRater
-            ArrayList<String> itemsRated = currRater.getItemsRated();
-            // itterate over movies rated by currRater
-            for (int j = 0; j < itemsRated.size(); j++) {
-                String currMovieID = itemsRated.get(j).toString();
-                boolean isMovieNew = !ratedMovies.contains(currMovieID);
-                if(isMovieNew){
-                    ratedMovies.add(currMovieID);
-                    double averageRating = 
-                            getAverageByID(currMovieID,minimalRaters);
-                    if(averageRating!=0.0){
-                        Rating currRating = 
-                            new Rating(currMovieID, averageRating);
-                        averageRatings.add(currRating);
-                    }
-                }
+        // itterate over all movies
+        for (Movie m : myMovies) {
+            String movieID = m.getID();
+            double currValue = getAverageByID(movieID,
+                                                minimalRaters);
+            Rating currRating = new Rating(movieID, currValue);
+            if(currValue != 0.0){
+                averageRatings.add(currRating);
             }
         }
         return averageRatings;
@@ -117,7 +106,7 @@ public class SecondRatings {
         */
         
         // Test getAverageRatings()
-        int minimalRaters = 2;
+        int minimalRaters = 1;
         ArrayList<Rating> averageRatings = 
                                 getAverageRatings(minimalRaters);
         
@@ -129,6 +118,7 @@ public class SecondRatings {
                                 + " was rated " + currMovieAverage);
         }
         
+        /*
         // Test getTitle()
         String movieID = "1798709";
         String title = getTitle(movieID);
@@ -143,5 +133,6 @@ public class SecondRatings {
         
         System.out.println("Title: " + title2 + 
                             "\tMovieID: " + movieID2 );
+        */
     }
 }

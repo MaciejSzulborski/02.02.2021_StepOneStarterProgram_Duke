@@ -22,10 +22,12 @@ public class MovieRunnerAverage {
     //      uses private method getSortedAverageRatings
     public void printAverageRatings(){
         // DETERMINE FILES WITH DATA
-        //String moviefile = "data/ratedmoviesfull.csv";
-        String moviefile = "data/ratedmovies_short.csv";
-        //String ratingsfile = "data/ratings.csv";
-        String ratingsfile = "data/ratings_short.csv";
+        String moviefile = "data/ratedmoviesfull.csv";
+        //String moviefile = "data/ratedmovies_short.csv";
+        //String moviefile = "data/ratedmovies_quiz1.csv";
+        String ratingsfile = "data/ratings.csv";
+        //String ratingsfile = "data/ratings_short.csv";
+        //String ratingsfile = "data/ratings_quiz1.csv";
         
         SecondRatings SecondRatings = new SecondRatings(
                                                 moviefile,ratingsfile);
@@ -39,9 +41,12 @@ public class MovieRunnerAverage {
         // by rating value - ascending
         
         // DETERMIN MINIMALRATINGS GATE
-        int minimalRatings = 2;
+        int minimalRatings = 12;
         ArrayList<Rating> averageRatings = 
                     SecondRatings.getAverageRatings(minimalRatings);
+                    
+        System.out.println("found "+ averageRatings.size() 
+                                                        +" movies");
         ///*
         System.out.println("\nRating list in ascending order:\n");
         ArrayList<Rating> sortedAverageRatings = 
@@ -68,13 +73,13 @@ public class MovieRunnerAverage {
     // minimalRatings set to zero - complete averageRatingsList
     public void getAverageRatingOneMovie(){
         // DETERMINE FILES WITH DATA
-        //String moviefile = "data/ratedmoviesfull.csv";
-        String moviefile = "data/ratedmovies_short.csv";
-        //String ratingsfile = "data/ratings.csv";
-        String ratingsfile = "data/ratings_short.csv";
+        String moviefile = "data/ratedmoviesfull.csv";
+        //String moviefile = "data/ratedmovies_short.csv";
+        String ratingsfile = "data/ratings.csv";
+        //String ratingsfile = "data/ratings_short.csv";
         
         // PUT MOVIE TITLE HERE 
-        String movieTitle = "The Godfather";
+        String movieTitle = "Vacation";
         
         SecondRatings SecondRatings = new SecondRatings(
                                                 moviefile,ratingsfile);
